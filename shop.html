@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>carousel模块快速使用</title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<style>
+			input::-moz-placeholder {
+				color: white;
+			}
+			
+			input::-webkit-input-placeholder {
+				color: white;
+			}
+			
+			input::-ms-input-placeholder {
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<ul class="layui-nav layui-bg-green">
+			<li class="layui-nav-item">
+				<a href="">首页<span class="layui-badge">9</span></a>
+			</li>
+			<li class="layui-nav-item">
+				<a id="login" style="cursor: pointer;">登录</span>
+				</a>
+			</li>
+
+			<li class="layui-nav-item" lay-unselect="">
+				<a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="javascript:;">修改信息</a>
+					</dd>
+					<dd>
+						<a href="javascript:;">安全管理</a>
+					</dd>
+					<dd>
+						<a href="javascript:;">退了</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<label class="layui-form-label" style="position: relative; top: 12px;">日期</label>
+				<div class="layui-input-inline">
+					<input style="background-color: #009688!important;
+    border: 0;color: white;" type="text" class="layui-input" id="test-limit1" placeholder="yyyy-MM-dd">
+				</div>
+			</li>
+		</ul>
+		<div style="position: relative; width: 778px;margin: 0 auto;">
+			<div class="layui-carousel" id="test1">
+				<div carousel-item="">
+					<div><img src="img/img1.png"></div>
+					<div><img src="img/img2.png"></div>
+					<div><img src="img/img3.png"></div>
+					<div><img src="img/img4.png"></div>
+
+				</div>
+			</div>
+		</div>
+
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+			<legend>热销商品</legend>
+		</fieldset>
+
+		<div style="padding: 20px; background-color: #F2F2F2;">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-md6">
+					<div class="layui-card">
+						<div class="layui-card-header">益智玩具</div>
+						<div class="layui-card-body">
+							<a style="cursor: pointer;" class="btn-goods">乐高</a>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-md6">
+					<div class="layui-card">
+						<div class="layui-card-header">精品食品</div>
+						<div class="layui-card-body">
+							<a style="cursor: pointer;" class="btn-goods">辣条</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 条目中可以是任意内容，如：<img src=""> -->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="layui/layui.all.js"></script>
+		<script>
+			layui.use('carousel', function() {
+				var carousel = layui.carousel;
+				//建造实例
+				carousel.render({
+					interval: 3000,
+					elem: '#test1',
+					height: '440px',
+					width: '780px', //设置容器宽度
+					arrow: 'hover', //始终显示箭头
+					anim: "fade"
+					//,anim: 'updown' //切换动画方式
+				});
+			});
+
+			layui.use('layer', function() {
+				var layers = layui.carousel;
+				//建造实例
+				$('#login').click(function() {
+					//iframe层
+					layer.open({
+						type: 2,
+						title: '登录',
+						shadeClose: true,
+						shade: 0.8,
+						area: ['380px', '90%'],
+						content: 'login.html'
+					});
+				});
+				$(".btn-goods").click(function() {
+					console.log("aaa")
+					//					$.getJSON('data.json', function(json) {
+
+					layer.photos({
+						photos: {
+							"title": "aa", //相册标题
+							"id": 123, //相册id
+							"start": 0, //初始显示的图片序号，默认0
+							"data": [ //相册包含的图片，数组格式
+								{
+									"alt": "正面",
+									"pid": 1, //图片id
+									"src": "img/img1.png", //原图地址
+									"thumb": "" //缩略图地址
+								},
+								{
+									"alt": "左侧面",
+									"pid": 2, //图片id
+									"src": "img/img2.png", //原图地址
+									"thumb": "" //缩略图地址
+								},
+								{
+									"alt": "右侧面",
+									"pid": 3, //图片id
+									"src": "img/img3.png", //原图地址
+									"thumb": "" //缩略图地址
+								},
+								{
+									"alt": "后面",
+									"pid": 4, //图片id
+									"src": "img/img4.png", //原图地址
+									"thumb": "" //缩略图地址
+								}
+							]
+						},
+						anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+					});
+					//					});
+				})
+
+			});
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+				//限定可选日期
+				var ins22 = laydate.render({
+					elem: '#test-limit1',
+					min: '2019-11-26',
+					mark: {
+						'0-10-14': '生日',
+						'0-12-31': '跨年', //每年的日期
+						'0-0-10': '工资', //每月某天
+						'0-0-29': '还款'
+					},
+					max: '2019-12-10',
+					ready: function() {
+						ins22.hint('日期可选值设定在 <br> 2019-11-26 到 2019-12-10');
+					}
+				});
+
+			})
+
+			
+		</script>
+	</body>
+
+</html>

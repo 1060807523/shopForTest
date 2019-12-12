@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+	</head>
+
+	<body style="padding: 30px;padding-right: 50px;">
+		<form class="layui-form" action="" lay-filter="example">
+			<div class="layui-form-item">
+				<label class="layui-form-label">输入框</label>
+				<div class="layui-input-block">
+					<input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">密码框</label>
+				<div class="layui-input-block">
+					<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button type="button" onclick="save()" class="layui-btn layui-btn-normal layui-layer-close1" id="LAY-component-form-setval">登录</button>
+					
+				</div>
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="layui/layui.all.js"></script>
+	<script>
+		function save() {
+			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+			parent.layer.close(index);
+		}
+	</script>
+</html>
